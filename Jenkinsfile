@@ -19,16 +19,16 @@ pipeline {
                     // Clean up existing containers and images
                     sh '''
                         docker compose down || true
-                        docker rmi "anselmpowell/laravel-php" || true
+                        docker rmi "st20130981/laravel-php" || true
                         
                         # Build the Docker image
-                        docker build -t "anselmpowell/laravel-php" .
+                        docker build -t "st20130981/laravel-php" .
                         
                         # Start the containers
                         docker compose up -d
                         
                         # Push the image to Docker Hub
-                        docker push "anselmpowell/laravel-php"
+                        docker push "st20130981/laravel-php"
                     '''
                 }
             }
