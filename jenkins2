@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('   ')// use your docker id
-        EC2_SSH_CREDENTIALS = credentials('88') // Replace with your actual credentials ID
-        EC2_HOST = 'ec3232323' // Replace with your EC2 instance IP or hostname
+        DOCKERHUB_CREDENTIALS = credentials('docker-token')// use your docker id
+        EC2_SSH_CREDENTIALS = credentials('EC2_SSH_CREDENTIALS') // Replace with your actual credentials ID
+        EC2_HOST = 'ec2-13-60-172-85.eu-north-1.compute.amazonaws.com' // Replace with your EC2 instance IP or hostname
         EC2_USER = 'ubuntu' // Replace with your EC2 username (e.g., 'ubuntu' for Ubuntu instances)
     }
 
@@ -22,9 +22,9 @@ pipeline {
                 sh '''
                     docker stop laravel-container || true
                     docker rm laravel-container || true
-                    docker rmi bassam2080/laravel-php || true
-                    docker build -t bassam2080/laravel-php .
-                    docker push bassam2080/laravel-php
+                    docker rmi st20130981/laravel-php || true
+                    docker build -t st20130981/laravel-php .
+                    docker push st20130981/laravel-php
                 '''
             }
         }
@@ -55,14 +55,14 @@ then
 fi
 
 # Pull the latest Docker image
-docker pull bassam2080/laravel-php
+docker pull st20130981/laravel-php
 
 # Stop and remove existing container if it exists
 docker stop laravel-container || true
 docker rm laravel-container || true
 
 # Run the new container
-docker run -d --name laravel-container -p 5000:80 bassam2080/laravel-php
+docker run -d --name laravel-container -p 5000:80 st20130981/laravel-php
 EOF
                     '''
                 }
